@@ -32,13 +32,14 @@ Engine::Engine() :
   mountains("mountains", Gamedata::getInstance().getXmlInt("mountains/factor") ),
   lines("lines", Gamedata::getInstance().getXmlInt("lines/factor") ),
   viewport( Viewport::getInstance() ),
+  sound(),
   player(new Player("plane")),
   aliens(),
   currentSprite(0),
   makeVideo( false )
 {
   player->setScale(.8);
-
+  sound.toggleMusic();  
   for (int i = 0; i < Gamedata::getInstance().getXmlInt("numberOfAliens"); i++)
   {
     aliens.emplace_back( new TwowayMultiSprite("alien", player));

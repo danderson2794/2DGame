@@ -7,8 +7,7 @@
 #include "twowayMultisprite.h"
 #include "player.h"
 #include "viewport.h"
-
-// class Player;
+#include "sound.h"
 
 class Engine {
 public:
@@ -27,6 +26,8 @@ private:
   World mountains;
   World lines;
   Viewport& viewport;
+
+  SDLSound sound;
 
   Player* player;
   std::vector<TwowayMultiSprite*> aliens;
