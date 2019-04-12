@@ -1,0 +1,35 @@
+Name:
+    Damion Anderson
+
+Course:
+    CPSC4160
+
+Clemson Email Address:
+    daander@clemson.edu
+
+Project no: #4
+
+Project due date:
+    29 March 2019
+
+Project Description:
+    Project 4 takes Project 3 and builds upon. The new project now has a 
+controllable player that can interact with enemy spaceships. There is also
+a HUD that demonstrates how to play and tells FPS. 
+
+The easiest part of this project:
+    Implementing the player was the easiest for me. 
+
+Problems I had:
+    I had a significant amount of trouble with the AI. I spent a lot of time
+trying to get it to fly in the other direction. I thought Dr. Malloy's code 
+would work well with my code, but I couldn't get it to change position smoothly.
+
+Vision for the final project:
+    In the next iteration, my sprite will fire a blaster that will zap the 
+enemies instead of just colliding with them. I created all of the sprites in
+my game. I will keep score on my game by keeping track of the size of the 
+array and subtracting one every time the player kills an alien spaceship. 
+The objective of the game will be to kill all the alien spaceships before 
+they attack you. The game will conclude when either you kill all the aliens,
+or the aliens kill you. 
