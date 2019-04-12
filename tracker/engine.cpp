@@ -34,14 +34,15 @@ Engine::Engine() :
   viewport( Viewport::getInstance() ),
   sound(),
   player(new Player("plane")),
+  score(0),
   aliens(),
   currentSprite(0),
   makeVideo( false )
 {
   player->setScale(.8);
-  sound.toggleMusic();  
   for (int i = 0; i < Gamedata::getInstance().getXmlInt("numberOfAliens"); i++)
   {
+    sound.toggleMusic();
     aliens.emplace_back( new TwowayMultiSprite("alien", player));
     aliens.at(i)->setScale(.8);
     player->attach(aliens.at(i));
@@ -49,6 +50,7 @@ Engine::Engine() :
 
 
   
+  sound.toggleMusic();  
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
 }

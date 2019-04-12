@@ -20,7 +20,7 @@ SDLSound::~SDLSound()
 }
 
 SDLSound::SDLSound() :
-    volume(SDL_MIX_MAXVOLUME/10),
+    volume(SDL_MIX_MAXVOLUME/5),
     currentSound(-1),
     music(NULL),
     audioRate(22050),

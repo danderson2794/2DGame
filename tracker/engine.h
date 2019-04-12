@@ -30,6 +30,7 @@ private:
   SDLSound sound;
 
   Player* player;
+  int score;
   std::vector<TwowayMultiSprite*> aliens;
   int currentSprite;
 
