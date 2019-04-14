@@ -57,9 +57,9 @@
   <startLoc x="250" y="40"/>
   <frames>1</frames>
   <frameInterval>0</frameInterval>
-  <speedX>500</speedX>
+  <speedX>600</speedX>
   <speedY>500</speedY>
-  <safeDistance>300</safeDistance>
+  <safeDistance>400</safeDistance>
   <transparency>false</transparency>
   <chunk>
     <size>16</size>

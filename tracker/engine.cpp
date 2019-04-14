@@ -8,17 +8,18 @@
 #include "sprite.h"
 #include "multisprite.h"
 // #include "twowayMultisprite.h"
-// #include "player.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
 #include "collisionStrategy.h"
 
 Engine::~Engine() { 
-  for(int i = 0; i < static_cast<int>( aliens.size() ); i++)
+  
+  for (auto it : aliens)
   {
-    delete aliens.at(i);
+      delete it;
   }
+
   delete player;
   std::cout << "Terminating program" << std::endl;
 }
@@ -62,10 +63,10 @@ void Engine::draw() const {
   space.draw();
   mountains.draw();
   lines.draw();
-    if (gameOver)
+  if (gameOver)
   {
-    IoMod::getInstance().deathText("Oh dear, you've died!", 600, 300, {255, 0, 0, 0});
-    clock.pause();
+    //io.deathText("Oh dear, you've died!", 600, 300, {255, 0, 0, 0});
+    //clock.pause();
   }
   //iterate through the vector and draw.
   for(TwowayMultiSprite* s : aliens)
@@ -87,7 +88,9 @@ void Engine::update(Uint32 ticks) {
   for(TwowayMultiSprite* a : aliens) a->update(ticks, player);
   if(gameOver)
   {
-    sound.toggleMusic();
+    score = 0;
+    gameOver = false;
+    //sound.toggleMusic();
   }
   player->update(ticks);
   
@@ -143,7 +146,7 @@ bool Engine::play() {
         }
       if(keystate[SDL_SCANCODE_Y])
       {
-        
+        clock.unpause();    
       }
       if(keystate[SDL_SCANCODE_F1])
       {
