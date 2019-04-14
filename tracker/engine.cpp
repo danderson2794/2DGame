@@ -7,8 +7,8 @@
 #include <iomanip>
 #include "sprite.h"
 #include "multisprite.h"
-#include "twowayMultisprite.h"
-#include "player.h"
+// #include "twowayMultisprite.h"
+// #include "player.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
@@ -32,6 +32,9 @@ Engine::Engine() :
   mountains("mountains", Gamedata::getInstance().getXmlInt("mountains/factor") ),
   lines("lines", Gamedata::getInstance().getXmlInt("lines/factor") ),
   viewport( Viewport::getInstance() ),
+  hud( Hud::getInstance() ), //using Singleton
+  hudOn(true),
+  gameOver(false),
   sound(),
   player(new Player("plane")),
   score(0),
@@ -59,12 +62,20 @@ void Engine::draw() const {
   space.draw();
   mountains.draw();
   lines.draw();
+    if (gameOver)
+  {
+    IoMod::getInstance().deathText("Oh dear, you've died!", 600, 300, {255, 0, 0, 0});
+    clock.pause();
+  }
   //iterate through the vector and draw.
   for(TwowayMultiSprite* s : aliens)
   {
     s->draw();
   }
-  
+  if(hudOn) 
+  {
+    hud.draw(score);
+  }
   player->draw();
 
   viewport.draw();
@@ -72,9 +83,14 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
-  for(TwowayMultiSprite* a : aliens) a->update(ticks, player);
-  player->update(ticks);
 
+  for(TwowayMultiSprite* a : aliens) a->update(ticks, player);
+  if(gameOver)
+  {
+    sound.toggleMusic();
+  }
+  player->update(ticks);
+  
   space.update();
   mountains.update();
   lines.update();
@@ -87,10 +103,12 @@ void Engine::checkForCollisions() {
     if ( player->collidedWith(s) ) {
       player->explode();
       s->explode();
+      gameOver = true;
       
     }
     if ( player->shot(s) ) {
       s->explode();
+      score++;
     }
   }
 }
@@ -106,7 +124,7 @@ void Engine::switchSprite(){
   }
 }
 
-void Engine::play() {
+bool Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -123,17 +141,15 @@ void Engine::play() {
           done = true;
           break;
         }
-        if ( keystate[SDL_SCANCODE_P] ) {
-          if ( clock.isPaused() ) clock.unpause();
-          else clock.pause();
-        }
-        if ( keystate[SDL_SCANCODE_E] ) {
-          if ( currentSprite ) player->explode();
-          else aliens.at(0)->explode();
-        }
-        if ( keystate[SDL_SCANCODE_T] ) {
-          switchSprite();
-        }
+      if(keystate[SDL_SCANCODE_Y])
+      {
+        
+      }
+      if(keystate[SDL_SCANCODE_F1])
+      {
+        if (hudOn) {hudOn = false;}
+        else { hudOn = true;}
+      }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
           makeVideo = true;
@@ -149,6 +165,7 @@ void Engine::play() {
     ticks = clock.getElapsedTicks();
     if ( ticks > 0 ) {
       clock.incrFrame();
+      
       if (keystate[SDL_SCANCODE_SPACE]) {
         static_cast<Player*>(player)->shoot();
       }
@@ -172,4 +189,5 @@ void Engine::play() {
       }
     }
   }
+  return false;
 }

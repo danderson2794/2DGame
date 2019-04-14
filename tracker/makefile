@@ -29,6 +29,7 @@ OBJS = \
 	clock.o \
 	engine.o \
 	sound.o \
+	hud.o	\
 	main.o
 EXEC = run
 

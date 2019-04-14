@@ -107,5 +107,14 @@
   <transparency>false</transparency>
 </planeBullet>
 
+<HUD>
+  <message>Use ASWD to move and spacebar to shoot! </message>
+  <width>500</width>
+  <height>200</height>
+  <position x="0" y="0"/>
+  <backColor r="0" g="0" b="0" a="150"/>
+  <mainColor r="0" g="255" b="255" a="0" />
+</HUD>
+
 
 </GameData>

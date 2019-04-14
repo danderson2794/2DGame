@@ -1,6 +1,6 @@
 #include <vector>
 #include <SDL.h>
-#include "ioMod.h"
+// #include "ioMod.h"
 #include "renderContext.h"
 #include "clock.h"
 #include "world.h"
@@ -8,12 +8,13 @@
 #include "player.h"
 #include "viewport.h"
 #include "sound.h"
+#include "hud.h"
 
 class Engine {
 public:
   Engine ();
   ~Engine ();
-  void play();
+  bool play();
   void switchSprite();
 
 private:
@@ -26,7 +27,9 @@ private:
   World mountains;
   World lines;
   Viewport& viewport;
-
+  Hud& hud;
+  bool hudOn;
+  bool gameOver;
   SDLSound sound;
 
   Player* player;
