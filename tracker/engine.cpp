@@ -89,11 +89,12 @@ void Engine::checkForCollisions() {
   {
     if ( player->collidedWith(s) ) {
       player->explode();
-      s->explode();
-      
+      //s->explode();
+      score = 0;
     }
     if ( player->shot(s) ) {
       s->explode();
+      score++;
     }
   }
 }

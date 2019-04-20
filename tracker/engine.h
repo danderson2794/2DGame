@@ -1,4 +1,3 @@
-#include <vector>
 #include <SDL.h>
 #include "renderContext.h"
 #include "clock.h"
