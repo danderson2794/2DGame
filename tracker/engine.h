@@ -1,20 +1,19 @@
 #include <vector>
 #include <SDL.h>
-// #include "ioMod.h"
 #include "renderContext.h"
 #include "clock.h"
 #include "world.h"
 #include "twowayMultisprite.h"
 #include "player.h"
 #include "viewport.h"
-#include "sound.h"
 #include "hud.h"
+#include "sound.h"
 
 class Engine {
 public:
   Engine ();
   ~Engine ();
-  bool play();
+  void play();
   void switchSprite();
 
 private:
@@ -27,16 +26,14 @@ private:
   World mountains;
   World lines;
   Viewport& viewport;
-  Hud& hud;
-  bool hudOn;
-  bool gameOver;
+
   SDLSound sound;
 
   Player* player;
   int score;
   std::vector<TwowayMultiSprite*> aliens;
-  int currentSprite;
-
+  Hud& hud;
+  bool HUDon;
   bool makeVideo;
 
   void draw() const;

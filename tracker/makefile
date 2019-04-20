@@ -19,6 +19,7 @@ OBJS = \
 	sprite.o \
 	bullet.o \
 	bullets.o \
+	hud.o \
 	collisionStrategy.o \
 	multisprite.o \
 	twowayMultisprite.o \
@@ -29,7 +30,6 @@ OBJS = \
 	clock.o \
 	engine.o \
 	sound.o \
-	hud.o	\
 	main.o
 EXEC = run
 

@@ -7,19 +7,18 @@
 #include <iomanip>
 #include "sprite.h"
 #include "multisprite.h"
-// #include "twowayMultisprite.h"
+#include "twowayMultisprite.h"
+#include "player.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
 #include "collisionStrategy.h"
 
 Engine::~Engine() { 
-  
-  for (auto it : aliens)
+  for(int i = 0; i < static_cast<int>( aliens.size() ); i++)
   {
-      delete it;
+    delete aliens.at(i);
   }
-
   delete player;
   std::cout << "Terminating program" << std::endl;
 }
@@ -33,14 +32,12 @@ Engine::Engine() :
   mountains("mountains", Gamedata::getInstance().getXmlInt("mountains/factor") ),
   lines("lines", Gamedata::getInstance().getXmlInt("lines/factor") ),
   viewport( Viewport::getInstance() ),
-  hud( Hud::getInstance() ), //using Singleton
-  hudOn(true),
-  gameOver(false),
   sound(),
   player(new Player("plane")),
   score(0),
   aliens(),
-  currentSprite(0),
+  hud( Hud::getInstance() ),
+  HUDon(true),
   makeVideo( false )
 {
   player->setScale(.8);
@@ -63,20 +60,14 @@ void Engine::draw() const {
   space.draw();
   mountains.draw();
   lines.draw();
-  if (gameOver)
-  {
-    //io.deathText("Oh dear, you've died!", 600, 300, {255, 0, 0, 0});
-    //clock.pause();
-  }
+
+  if(HUDon) { hud.draw(score);}
   //iterate through the vector and draw.
   for(TwowayMultiSprite* s : aliens)
   {
     s->draw();
   }
-  if(hudOn) 
-  {
-    hud.draw(score);
-  }
+  
   player->draw();
 
   viewport.draw();
@@ -84,16 +75,9 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
-
   for(TwowayMultiSprite* a : aliens) a->update(ticks, player);
-  if(gameOver)
-  {
-    score = 0;
-    gameOver = false;
-    //sound.toggleMusic();
-  }
   player->update(ticks);
-  
+
   space.update();
   mountains.update();
   lines.update();
@@ -106,28 +90,15 @@ void Engine::checkForCollisions() {
     if ( player->collidedWith(s) ) {
       player->explode();
       s->explode();
-      gameOver = true;
       
     }
     if ( player->shot(s) ) {
       s->explode();
-      score++;
     }
   }
 }
 
-void Engine::switchSprite(){
-  ++currentSprite;
-  currentSprite = currentSprite % 2;
-  if ( currentSprite ) {
-    Viewport::getInstance().setObjectToTrack(player);
-  }
-  else {
-    Viewport::getInstance().setObjectToTrack(aliens.at(0));
-  }
-}
-
-bool Engine::play() {
+void Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -144,14 +115,10 @@ bool Engine::play() {
           done = true;
           break;
         }
-      if(keystate[SDL_SCANCODE_Y])
-      {
-        clock.unpause();    
-      }
       if(keystate[SDL_SCANCODE_F1])
       {
-        if (hudOn) {hudOn = false;}
-        else { hudOn = true;}
+        if(HUDon) HUDon = false;
+        else HUDon = true;
       }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
@@ -168,7 +135,6 @@ bool Engine::play() {
     ticks = clock.getElapsedTicks();
     if ( ticks > 0 ) {
       clock.incrFrame();
-      
       if (keystate[SDL_SCANCODE_SPACE]) {
         static_cast<Player*>(player)->shoot();
       }
@@ -192,5 +158,4 @@ bool Engine::play() {
       }
     }
   }
-  return false;
 }

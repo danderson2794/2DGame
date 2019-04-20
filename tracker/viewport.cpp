@@ -25,8 +25,12 @@ void Viewport::setObjectToTrack(const Drawable *obj) {
 }
 
 void Viewport::draw() const {
-  SDL_Color c = {0, 255, 255, 0};
-  IoMod::getInstance().writeText("Damion Anderson", 60, 600, c);
+  SDL_Color text = {static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/mainColor/r")),
+                    static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/mainColor/g")),
+                    static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/mainColor/b")),
+                    static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/mainColor/a"))};
+  IoMod::getInstance().
+    writeText("Damion Anderson", 30, 600, text);
 }
 
 void Viewport::update() {

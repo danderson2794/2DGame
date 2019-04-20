@@ -1,5 +1,7 @@
 #include "hud.h"
 
+Hud::~Hud() {}
+
 //Singleton Implementation
 Hud& Hud::getInstance()
 {
@@ -84,8 +86,5 @@ void Hud::draw(int score)
         IoMod::getInstance().writeText(gameInfo.str(), getPosition()[0]+30, getPosition()[1]+130, getMainColor()),
               getWidth(),
               getMainColor();
-        
-
-
     }
 }
