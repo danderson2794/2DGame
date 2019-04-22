@@ -1,5 +1,3 @@
-// This is the "pointers" example in the Brian example
-
 #include <vector>
 #include <list>
 #include "chunk.h"

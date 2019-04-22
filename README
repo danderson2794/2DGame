@@ -7,29 +7,28 @@ Course:
 Clemson Email Address:
     daander@clemson.edu
 
-Project no: #4
+Project no: #5
 
 Project due date:
-    29 March 2019
+    21 April 2019
 
 Project Description:
-    Project 4 takes Project 3 and builds upon. The new project now has a 
-controllable player that can interact with enemy spaceships. There is also
-a HUD that demonstrates how to play and tells FPS. 
+    This project continues off of Project 4. We are to have an actual game at this point. 
+
 
 The easiest part of this project:
-    Implementing the player was the easiest for me. 
+    The easiest part for me was the hud. Dr. Malloy gave more than enough examples
+and they really helped me understand what I was supposed to do. 
 
 Problems I had:
-    I had a significant amount of trouble with the AI. I spent a lot of time
-trying to get it to fly in the other direction. I thought Dr. Malloy's code 
-would work well with my code, but I couldn't get it to change position smoothly.
+	The biggest problem I had was recording the darn thing. My previous linux distro
+did not play well recording with my integrated GPU. I am now on Ubuntu 19.04 Disco Dingo
+(which is great for 4k displays) and had no issues at all. Stability is a beautiful thing!
 
-Vision for the final project:
-    In the next iteration, my sprite will fire a blaster that will zap the 
-enemies instead of just colliding with them. I created all of the sprites in
-my game. I will keep score on my game by keeping track of the size of the 
-array and subtracting one every time the player kills an alien spaceship. 
-The objective of the game will be to kill all the alien spaceships before 
-they attack you. The game will conclude when either you kill all the aliens,
-or the aliens kill you. 
+	Outside of os issues, I ran into an issue with a segfault in a destructor. 
+I spent hours trying to find it, but ended up reverting to an older version (thank you GitHub)
+and being extra careful when adding the HUD (this version did not have the HUD implemented). 
+
+	Shooting was another area that took a while. My Project 4 was doing compisition. I changed
+project 5 to inherit from the Drawable class. This made it much easier to follow along with Dr. 
+Malloy's YouTube videos and overall was an easier experience. 
