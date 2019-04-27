@@ -1,34 +1,14 @@
 Name:
-    Damion Anderson
 
 Course:
-    CPSC4160
 
 Clemson Email Address:
-    daander@clemson.edu
 
-Project no: #5
+Final Project: #6
 
-Project due date:
-    21 April 2019
+Project due date: May 1st, 2019 at 8 AM
 
-Project Description:
-    This project continues off of Project 4. We are to have an actual game at this point. 
+Project description:
 
+The Pizzazz feature that I added:
 
-The easiest part of this project:
-    The easiest part for me was the hud. Dr. Malloy gave more than enough examples
-and they really helped me understand what I was supposed to do. 
-
-Problems I had:
-	The biggest problem I had was recording the darn thing. My previous linux distro
-did not play well recording with my integrated GPU. I am now on Ubuntu 19.04 Disco Dingo
-(which is great for 4k displays) and had no issues at all. Stability is a beautiful thing!
-
-	Outside of os issues, I ran into an issue with a segfault in a destructor. 
-I spent hours trying to find it, but ended up reverting to an older version (thank you GitHub)
-and being extra careful when adding the HUD (this version did not have the HUD implemented). 
-
-	Shooting was another area that took a while. My Project 4 was doing compisition. I changed
-project 5 to inherit from the Drawable class. This made it much easier to follow along with Dr. 
-Malloy's YouTube videos and overall was an easier experience. 
