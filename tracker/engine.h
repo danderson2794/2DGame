@@ -1,12 +1,13 @@
 #include <SDL.h>
 #include "renderContext.h"
-#include "clock.h"
+//#include "clock.h"
 #include "world.h"
 #include "twowayMultisprite.h"
 #include "player.h"
 #include "viewport.h"
 #include "hud.h"
 #include "sound.h"
+#include "menuEngine.h"
 
 class Engine {
 public:
@@ -25,6 +26,7 @@ private:
   World mountains;
   World lines;
   Viewport& viewport;
+  MenuEngine menuEngine;
 
   SDLSound sound;
 

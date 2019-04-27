@@ -8,7 +8,6 @@
 #include "gamedata.h"
 #include "ioMod.h"
 #include "vector2f.h"
-
 class Hud
 {
 public:

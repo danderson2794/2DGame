@@ -1,4 +1,4 @@
-CXX = g++
+CXX = clang++
 
 # Warnings frequently signal eventual errors:
 CXXFLAGS=`sdl2-config --cflags` -g -W -Wall -Werror -std=c++11 -Weffc++ -Wextra -pedantic -O0 -I `sdl2-config --prefix`/include/
@@ -8,6 +8,8 @@ LDFLAGS = `sdl2-config --libs` -lm -lexpat -lSDL2_ttf -lSDL2_image -lSDL2_mixer
 OBJS = \
   renderContext.o \
 	ioMod.o \
+	menuEngine.o \
+	menu.o \
 	parseXML.o \
 	gamedata.o \
 	viewport.o \

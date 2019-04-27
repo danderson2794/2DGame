@@ -32,6 +32,7 @@ Engine::Engine() :
   mountains("mountains", Gamedata::getInstance().getXmlInt("mountains/factor") ),
   lines("lines", Gamedata::getInstance().getXmlInt("lines/factor") ),
   viewport( Viewport::getInstance() ),
+  menuEngine(),
   sound(),
   player(new Player("plane")),
   score(0),
@@ -47,10 +48,7 @@ Engine::Engine() :
     aliens.emplace_back( new TwowayMultiSprite("alien", player));
     aliens.at(i)->setScale(.8);
     player->attach(aliens.at(i));
-  }
-
-
-  
+  }  
   sound.toggleMusic();  
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
@@ -89,7 +87,9 @@ void Engine::checkForCollisions() {
   {
     if ( player->collidedWith(s) ) {
       player->explode();
-      //s->explode();
+      clock.pause();
+      menuEngine.play();
+      clock.unpause();
       score = 0;
     }
     if ( player->shot(s) ) {
