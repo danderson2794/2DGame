@@ -1,5 +1,7 @@
 #include<sstream>
 #include "menu.h"
+#include <iostream>
+#include <fstream>
 
 Menu::Menu(SDL_Renderer* rend) :  
   renderer(rend), 
@@ -21,7 +23,7 @@ Menu::Menu(SDL_Renderer* rend) :
   ),
   clock( Clock::getInstance() ),
   io( IoMod::getInstance() ),
-  options(),
+  options(), 
   optionLoc( { gdata.getXmlInt("menu/optionLoc/x"),
                gdata.getXmlInt("menu/optionLoc/y")}
            ),
@@ -136,7 +138,7 @@ int Menu::getInputEventLoop() const {
       // In this section of the event loop we allow key bounce:
       drawBackground();
       io.writeText(msg, hudFrame.x+150, hudFrame.y+40);
-      io.writeText("Enter No. Stars: ", hudFrame.x+150, hudFrame.y+80);
+      // io.writeText("Enter No. Stars: ", hudFrame.x+150, hudFrame.y+80);
       io.writeText(inNumber, hudFrame.x+330, hudFrame.y+80);
       SDL_RenderPresent(renderer);
     }

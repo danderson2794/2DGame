@@ -35,7 +35,7 @@ bool MenuEngine::starsOptionChosen() {
 void MenuEngine::update(Uint32) {
 }
 
-void MenuEngine::play() {
+bool MenuEngine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -55,12 +55,8 @@ void MenuEngine::play() {
         if (keystate[SDL_SCANCODE_RETURN] ) {
           menu.lightOn();
           optionChoice = menu.getOptionNo();
-          if ( optionChoice == 0 ) done = true;
-          if ( optionChoice == 1 ) {
-            starsOption = true;
-            // numStars = menu.getNumStars();
-            //std::cout << "No is: " << numStars << std::endl;
-          }
+          if ( optionChoice == 0 ) return false;
+          if ( optionChoice == 1 ) exit (EXIT_FAILURE);
         }
       }
       if(event.type == SDL_KEYUP) {
@@ -71,4 +67,5 @@ void MenuEngine::play() {
     draw();
     //update(ticks);
   }
+  return false;
 }

@@ -6,7 +6,7 @@ class MenuEngine {
 public:
   MenuEngine ();
   ~MenuEngine ();
-  void play();
+  bool play();
   int getOptionChoice() const { return optionChoice; }
   bool starsOptionChosen();
 //   int getNumStars() const { return numStars; }

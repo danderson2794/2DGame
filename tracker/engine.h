@@ -13,7 +13,7 @@ class Engine {
 public:
   Engine ();
   ~Engine ();
-  void play();
+  bool play();
   void switchSprite();
 
 private:
@@ -43,5 +43,5 @@ private:
   Engine(const Engine&);
   Engine& operator=(const Engine&);
   void printScales() const;
-  void checkForCollisions();
+  bool checkForCollisions();
 };

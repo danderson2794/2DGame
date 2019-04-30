@@ -14,6 +14,7 @@
 #include "frameGenerator.h"
 #include "collisionStrategy.h"
 
+
 Engine::~Engine() { 
   for(int i = 0; i < static_cast<int>( aliens.size() ); i++)
   {
@@ -82,13 +83,14 @@ void Engine::update(Uint32 ticks) {
   viewport.update(); // always update viewport last
 }
 
-void Engine::checkForCollisions() {
+bool Engine::checkForCollisions() {
   for(TwowayMultiSprite* s : aliens)
   {
     if ( player->collidedWith(s) ) {
       player->explode();
       clock.pause();
-      menuEngine.play();
+      bool playAgain = menuEngine.play();
+      if(playAgain) return true;
       clock.unpause();
       score = 0;
     }
@@ -97,9 +99,10 @@ void Engine::checkForCollisions() {
       score++;
     }
   }
+  return false;
 }
 
-void Engine::play() {
+bool Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -151,7 +154,8 @@ void Engine::play() {
       if (keystate[SDL_SCANCODE_S]) {
         static_cast<Player*>(player)->down();
       }
-      checkForCollisions();
+      bool play = checkForCollisions();
+      if (play) return true;
       draw();
       update(ticks);
       if ( makeVideo ) {
@@ -159,4 +163,5 @@ void Engine::play() {
       }
     }
   }
-}
+  return false;
+} 

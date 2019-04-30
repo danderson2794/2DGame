@@ -5,7 +5,6 @@
 const int DIRECTION_MOD = 100;
 const int MAX_EXPLOSION_SPD = 100;
 const int MIN_EXPLOSION_SPD = 40;
-const int MAX_DISTANCE = 50;
 
 ExplodingSprite::ExplodingSprite(const Sprite& s) :
   Sprite(s), 

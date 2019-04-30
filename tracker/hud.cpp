@@ -1,6 +1,12 @@
 #include "hud.h"
+#include <fstream>
 
-Hud::~Hud() {}
+Hud::~Hud()
+{
+      std::ofstream file("highScores.txt");
+      file << highScore;
+      file.close();
+}
 
 //Singleton Implementation
 Hud& Hud::getInstance()
@@ -26,7 +32,11 @@ Hud::Hud() :
                                  static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/mainColor/g")),
                                  static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/mainColor/b")),
                                  static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/mainColor/a"))})
-{ }
+{
+      std::ifstream file("highScores.txt");
+      file >> highScore;
+      file.close();
+}
 
 void Hud::draw(int score)
 {
@@ -68,9 +78,6 @@ void Hud::draw(int score)
               getWidth(),
               getMainColor();
 
-
-
-
         gameInfo.str("");
         gameInfo.clear();
         gameInfo << "Your score is: " << score;
@@ -79,12 +86,24 @@ void Hud::draw(int score)
               getWidth(),
               getMainColor();
 
+
+
+
+        gameInfo.str("");
+        gameInfo.clear();
+        gameInfo << "Current High Score: " << highScore;
+
+        IoMod::getInstance().writeText(gameInfo.str(), getPosition()[0]+30, getPosition()[1]+130, getMainColor()),
+              getWidth(),
+              getMainColor();
+
         gameInfo.str("");
         gameInfo.clear();
 
         gameInfo << "Press F1 to turn toggle this HUD\n";
-        IoMod::getInstance().writeText(gameInfo.str(), getPosition()[0]+30, getPosition()[1]+130, getMainColor()),
+        IoMod::getInstance().writeText(gameInfo.str(), getPosition()[0]+30, getPosition()[1]+170, getMainColor()),
               getWidth(),
               getMainColor();
+      if(score > highScore) highScore = score;
     }
 }

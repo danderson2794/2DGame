@@ -42,6 +42,7 @@ public:
     ~Hud();
 private:
     std::string text;
+    int highScore;
     int width, height;
     Vector2f pos;
     bool power;
