@@ -1,14 +1,10 @@
-Name:
+This was my final project for Data Driven 2D Game Engine Construction. I took this course under Dr. Brian Malloy (retired) at Clemson University. 
 
-Course:
+In a bash terminal, run the following commands to install the libraries (Ubuntu / Debian):
 
-Clemson Email Address:
-
-Final Project: #6
-
-Project due date: May 1st, 2019 at 8 AM
-
-Project description:
-
-The Pizzazz feature that I added:
-
+sudo apt-get update
+sudo apt-get install libsdl2-dev
+sudo apt-get install libexpat1-dev
+sudo apt-get install libsdl2-image-dev
+sudo apt-get install libsdl2-ttf-dev
+sudo apt-get install libsdl2-mixer-dev
